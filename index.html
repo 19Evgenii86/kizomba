@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Кизомба — медленный танец | Стили, видео, статьи</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0A0A0C;
+            background-image: radial-gradient(circle at 25% 0%, rgba(45, 40, 35, 0.3) 0%, #0A0A0C 70%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #E8E6E1;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 12, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .logo h2 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #F5E7C8, #D4AF37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            cursor: pointer;
+        }
+        .logo p {
+            font-size: 0.7rem;
+            color: #A89F91;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #DDD6CC;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover {
+            color: #D4AF37;
+            border-bottom-color: #D4AF37;
+        }
+
+        /* Счётчик посещений */
+        .counter-bar {
+            background: rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 0.8rem;
+            color: #D4AF37;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .counter-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero {
+            min-height: 55vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(125deg, #0A0A0C 0%, #1A1714 100%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            background: linear-gradient(to right, #FFF8EA, #D4AF37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #BFB7AB;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 6rem;
+            scroll-margin-top: 90px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+            margin-bottom: 2rem;
+            display: inline-block;
+            background: linear-gradient(120deg, #FFFFFF, #D4AF37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            border-left: 4px solid #D4AF37;
+            padding-left: 1.2rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .event-card, .style-card {
+            background: rgba(28, 28, 35, 0.6);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 32px;
+            padding: 1.8rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .event-card:hover, .style-card:hover {
+            border-color: #D4AF37;
+            transform: translateY(-6px);
+            background: rgba(35, 35, 44, 0.8);
+        }
+        .event-card h3, .style-card h3 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #F2E5CF;
+            margin-bottom: 0.5rem;
+        }
+        .event-date {
+            color: #D4AF37;
+            font-weight: 500;
+            margin: 0.6rem 0;
+        }
+        .btn-outline {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1.2rem;
+            border: 1px solid #D4AF37;
+            border-radius: 40px;
+            color: #D4AF37;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .btn-outline:hover {
+            background: #D4AF37;
+            color: #0A0A0C;
+        }
+
+        .history-block {
+            background: rgba(20, 20, 25, 0.7);
+            border-radius: 32px;
+            padding: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .style-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .tag {
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 0.5rem 1.3rem;
+            border-radius: 60px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .tag:hover {
+            background: rgba(212, 175, 55, 0.25);
+            border-color: #D4AF37;
+        }
+
+        .articles-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .article-preview-card {
+            background: rgba(25, 25, 32, 0.7);
+            border-radius: 28px;
+            padding: 1.8rem;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .article-preview-card:hover {
+            border-color: #D4AF37;
+            background: rgba(35, 35, 45, 0.85);
+        }
+        .article-preview-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #F2E5CF;
+        }
+        .article-excerpt {
+            color: #BFB7AB;
+            margin: 0.8rem 0;
+        }
+        .read-more {
+            color: #D4AF37;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #D4AF37;
+        }
+
+        /* Форма связи */
+        .contact-form {
+            background: rgba(20, 20, 25, 0.7);
+            border-radius: 32px;
+            padding: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            margin-top: 1rem;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #D4AF37;
+            font-weight: 500;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(10, 10, 12, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 20px;
+            color: #E8E6E1;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #D4AF37;
+        }
+        .submit-btn {
+            background: #D4AF37;
+            color: #0A0A0C;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .submit-btn:hover {
+            background: #e6c35c;
+            transform: scale(1.02);
+        }
+        .form-success {
+            color: #6fcf97;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .full-article {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(15, 15, 20, 0.95);
+            border-radius: 32px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .full-article.active {
+            display: block;
+        }
+        .full-article h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #FFF, #D4AF37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .full-article h2 {
+            margin: 1.5rem 0 0.8rem;
+            color: #D4AF37;
+            font-size: 1.4rem;
+        }
+        .full-article p {
+            margin-bottom: 1rem;
+            color: #DDD2C4;
+            line-height: 1.7;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin: 1.5rem 0;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .article-quote {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #D4AF37;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #D4AF37;
+            text-decoration: none;
+            border: 1px solid #D4AF37;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .main-content.hide {
+            display: none;
+        }
+        footer {
+            border-top: 1px solid rgba(212, 175, 55, 0.25);
+            background: #060608;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: #8C857A;
+        }
+        @media (max-width: 700px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            .navbar { flex-direction: column; align-items: stretch; text-align: center; }
+            .nav-links { justify-content: center; }
+            .section-title { font-size: 1.8rem; }
+            .counter-bar { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- СЧЁТЧИК ПОСЕЩЕНИЙ -->
+<div class="counter-bar">
+    <div class="counter-item">👁️ Просмотров сегодня: <span id="todayCount">0</span></div>
+    <div class="counter-item">📊 Всего просмотров: <span id="totalCount">0</span></div>
+    <div class="counter-item">👥 Посетителей онлайн: <span id="onlineCount">0</span></div>
+</div>
+
+<nav class="navbar">
+    <div class="logo" onclick="showMainContent()">
+        <h2>Кизомба — медленный танец</h2>
+        <p>СТИЛИ • ВИДЕО • СТАТЬИ • АНАЛИТИКА</p>
+    </div>
+    <div class="nav-links">
+        <a href="#" onclick="showMainContent(); return false;">Главная</a>
+        <a href="#" onclick="scrollToSection('parties'); return false;">Вечеринки</a>
+        <a href="#" onclick="scrollToSection('history'); return false;">История</a>
+        <a href="#" onclick="scrollToSection('styles'); return false;">Стили</a>
+        <a href="#" onclick="scrollToSection('articles'); return false;">Статьи</a>
+        <a href="#" onclick="scrollToSection('contact'); return false;">Связь</a>
+    </div>
+</nav>
+
+<!-- ОСНОВНОЙ КОНТЕНТ -->
+<div id="mainContent" class="main-content">
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Кизомба — медленный танец</h1>
+            <p>Стили, видео, честные статьи о базе, принципах и настоящем танце</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- ВЕЧЕРИНКИ -->
+        <div id="parties" class="section">
+            <h2 class="section-title">🎫 Ближайшие вечеринки</h2>
+            <div class="cards-grid">
+                <div class="event-card">
+                    <h3>URBAN NIGHT</h3>
+                    <div class="event-date">📅 22 июня 2026 | 21:00</div>
+                    <p>DJ set, open level class, атмосфера premium lounge.</p>
+                    <a href="#" class="btn-outline">Инфо →</a>
+                </div>
+                <div class="event-card">
+                    <h3>TRADITIONAL ROOTS</h3>
+                    <div class="event-date">📅 30 июня 2026 | 20:30</div>
+                    <p>Ангольская школа, живая перкуссия, мастер-класс.</p>
+                    <a href="#" class="btn-outline">Подробнее →</a>
+                </div>
+                <div class="event-card">
+                    <h3>SEMBA & KIZOMBA</h3>
+                    <div class="event-date">📅 10 июля 2026 | 19:00</div>
+                    <p>Иммерсивный вечер, social dancing, диджей из Лиссабона.</p>
+                    <a href="#" class="btn-outline">Регистрация →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ИСТОРИЯ -->
+        <div id="history" class="section">
+            <h2 class="section-title">📜 История возникновения</h2>
+            <div class="history-block">
+                <p><strong>Кизомба</strong> (в переводе с языка кимбунду — «вечеринка») зародилась в <strong>Луанде, Ангола</strong> в конце 1970-х. Она выросла из национального ритма <strong>сембы</strong>, смешавшись с карибским зук, французской и португальской музыкой. Отличительные черты: медленный темп (90–110 BPM), глубокий бас, плавные мелодии.</p>
+                <p>В 1990-х кизомба через Португалию распространилась по Европе, а затем и по всему миру. Сегодня это глобальное явление с фестивалями в Париже, Роттердаме, Дубае и Сан-Паулу.</p>
+            </div>
+        </div>
+
+        <!-- СТИЛИ (6 штук) -->
+        <div id="styles" class="section">
+            <h2 class="section-title">💎 Стили кизомбы</h2>
+            <div class="style-tags">
+                <span class="tag" onclick="showStyleArticle('traditional')">🇦🇴 Traditional</span>
+                <span class="tag" onclick="showStyleArticle('urban')">🏙️ Urban Kiz</span>
+                <span class="tag" onclick="showStyleArticle('tarraxinha')">💃 Tarraxinha</span>
+                <span class="tag" onclick="showStyleArticle('douceur')">🕊️ Douceur</span>
+                <span class="tag" onclick="showStyleArticle('semba')">🥁 Semba</span>
+                <span class="tag" onclick="showStyleArticle('fusion')">🔥 Fusion</span>
+            </div>
+            <div class="cards-grid" style="margin-top: 1rem;">
+                <div class="style-card" onclick="showStyleArticle('traditional')"><h3>🇦🇴 Traditional</h3><p>Классическая ангольская манера</p></div>
+                <div class="style-card" onclick="showStyleArticle('urban')"><h3>🏙️ Urban Kiz</h3><p>Динамика, изоляции, hip-hop влияние</p></div>
+                <div class="style-card" onclick="showStyleArticle('tarraxinha')"><h3>💃 Tarraxinha</h3><p>Медленные бёдра, почти без шагов</p></div>
+                <div class="style-card" onclick="showStyleArticle('douceur')"><h3>🕊️ Douceur</h3><p>Французская нежность и волны</p></div>
+                <div class="style-card" onclick="showStyleArticle('semba')"><h3>🥁 Semba</h3><p>Энергичный предок кизомбы</p></div>
+                <div class="style-card" onclick="showStyleArticle('fusion')"><h3>🔥 Fusion</h3><p>Смесь стилей, свобода эксперимента</p></div>
+            </div>
+        </div>
+
+        <!-- СТАТЬИ (превью) -->
+        <div id="articles" class="section">
+            <h2 class="section-title">✍🏻 Мои статьи</h2>
+            <div class="articles-preview">
+                <div class="article-preview-card" onclick="showCriticalArticle(1)">
+                    <h3>🧠 «Почему 95% школ танцев не учат танцевать»</h3>
+                    <div class="article-excerpt">Рынок коммерческих танцев переполнен преподавателями, которые продают не умение, а иллюзию...</div>
+                    <span class="read-more">Читать полностью →</span>
+                </div>
+                <div class="article-preview-card" onclick="showCriticalArticle(2)">
+                    <h3>🔑 «Ключи от танца: как перестать повторять и начать танцевать»</h3>
+                    <div class="article-excerpt">Танец — это не заучка, это язык. База — это не связки, а принципы...</div>
+                    <span class="read-more">Читать полностью →</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ФОРМА СВЯЗИ -->
+        <div id="contact" class="section">
+            <h2 class="section-title">📧 Написать мне</h2>
+            <div class="contact-form">
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label>Ваше имя</label>
+                        <input type="text" id="userName" required placeholder="Анна или Александр">
+                    </div>
+                    <div class="form-group">
+                        <label>Ваш email</label>
+                        <input type="email" id="userEmail" required placeholder="example@mail.ru">
+                    </div>
+                    <div class="form-group">
+                        <label>Сообщение</label>
+                        <textarea id="userMessage" rows="4" required placeholder="Вопрос, предложение или просто слова поддержки..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">📨 Отправить</button>
+                    <div id="formSuccess" class="form-success">✅ Спасибо! Я свяжусь с вами в ближайшее время.</div>
+                </form>
+                <p style="margin-top: 1.2rem; font-size: 0.85rem; color: #A89F91;">📩 Или просто напишите на: <strong style="color:#D4AF37">znak86@list.ru</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- СТАТЬИ ПРО СТИЛИ (сокращённо, но все 6 есть) -->
+<div id="styleTraditional" class="full-article"><h1>🇦🇴 Traditional Kizomba</h1><p>Оригинальный стиль из Анголы: мягкие шаги, связь с полом, минимум вращений.</p><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/17iN9SV5eac" frameborder="0" allowfullscreen></iframe></div><div class="article-quote">«Traditional — разговор тел»</div><a href="#" onclick="showMainContent(); return false;" class="back-btn">← На главную</a></div>
+<div id="styleUrban" class="full-article"><h1>🏙️ Urban Kiz</h1><p>Европейская интерпретация: динамика, изоляции, хип-хоп влияние.</p><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/2jqYlGFZrvs" frameborder="0" allowfullscreen></iframe></div><a href="#" onclick="showMainContent(); return false;" class="back-btn">← На главную</a></div>
+<div id="styleTarraxinha" class="full-article"><h1>💃 Tarraxinha</h1><p>Самая медленная версия: бёдра, микропаузы, почти без шагов.</p><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/4X9PqRZUnnI" frameborder="0" allowfullscreen></iframe></div><a href="#" onclick="showMainContent(); return false;" class="back-btn">← На главную</a></div>
+<div id="styleDouceur" class="full-article"><h1>🕊️ Douceur</h1><p>Французская нежность: волны, подъёмы, романтика.</p><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/hBf8CEmTMRI" frameborder="0" allowfullscreen></iframe></div><a href="#" onclick="showMainContent(); return false;" class="back-btn">← На главную</a></div>
+<div id="styleSemba" class="full-article"><h1>🥁 Semba</h1><p>Энергичный предок кизомбы, прыжки и пружинистый шаг.</p><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/kBD5Yh_cLpE" frameborder="0" allowfullscreen></iframe></div><a href="#" onclick="showMainContent(); return false;" class="back-btn">← На главную</a></div>
+<div id="styleFusion" class="full-article"><h1>🔥 Kizomba Fusion</h1><p>Смесь кизомбы с контемп, джазом, афро-бит. Свобода эксперимента.</p><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/2nJqRjP3XzM" frameborder="0" allowfullscreen></iframe></div><div class="article-quote">«Выучи язык, чтобы писать свои стихи»</div><a href="#" onclick="showMainContent(); return false;" class="back-btn">← На главную</a></div>
+
+<!-- КРИТИЧЕСКИЕ СТАТЬИ -->
+<div id="criticalArticle1" class="full-article"><h1>🧠 Почему 95% школ танцев не учат танцевать</h1><p>Рынок коммерческих танцев переполнен преподавателями, которые продают иллюзию. Связки вместо базы, натаскивание вместо педагогики.</p><div class="article-quote"><strong>Резюме:</strong> Требуйте базу и анатомию. Преподаватель без «почему» — не учитель.</div><a href="#" onclick="showMainContent(); return false;" class="back-btn">← На главную</a></div>
+<div id="criticalArticle2" class="full-article"><h1>🔑 Ключи от танца: как перестать повторять и начать танцевать</h1><p>Танец — это язык. База — это принципы: перенос веса, импульс, работа корпуса.</p><div class="article-quote"><strong>Резюме:</strong> Ищите преподавателей, которые дают ключи, а не готовые замки.</div><a href="#" onclick="showMainContent(); return false;" class="back-btn">← На главную</a></div>
+
+<footer>
+    <p>Кизомба — медленный танец. Стили, видео, честные статьи. © 2026 | Почта: znak86@list.ru</p>
+</footer>
+
+<script>
+    // ========== СЧЁТЧИК ПОСЕЩЕНИЙ (localStorage + онлайн) ==========
+    function updateCounter() {
+        let total = localStorage.getItem('kizomba_total_views');
+        if (total === null) total = 0;
+        else total = parseInt(total);
+        
+        let lastDate = localStorage.getItem('kizomba_last_date');
+        let todayCount = localStorage.getItem('kizomba_today_count');
+        const today = new Date().toDateString();
+        
+        if (lastDate !== today) {
+            todayCount = 0;
+            localStorage.setItem('kizomba_last_date', today);
+        } else {
+            todayCount = parseInt(todayCount || 0);
+        }
+        
+        total++;
+        todayCount++;
+        
+        localStorage.setItem('kizomba_total_views', total);
+        localStorage.setItem('kizomba_today_count', todayCount);
+        
+        document.getElementById('todayCount').innerText = todayCount;
+        document.getElementById('totalCount').innerText = total;
+        
+        // Онлайн-счётчик (приблизительный)
+        let online = localStorage.getItem('kizomba_online');
+        if (online === null) online = 0;
+        else online = parseInt(online);
+        
+        // Обновляем онлайн при загрузке
+        if (!sessionStorage.getItem('kizomba_session_started')) {
+            online++;
+            sessionStorage.setItem('kizomba_session_started', 'true');
+            localStorage.setItem('kizomba_online', online);
+        }
+        
+        // При закрытии вкладки уменьшаем онлайн (приблизительно)
+        window.addEventListener('beforeunload', function() {
+            let currOnline = parseInt(localStorage.getItem('kizomba_online') || 0);
+            if (currOnline > 0) {
+                localStorage.setItem('kizomba_online', currOnline - 1);
+            }
+        });
+        
+        document.getElementById('onlineCount').innerText = localStorage.getItem('kizomba_online') || 0;
+    }
+    updateCounter();
+    
+    // ========== ФОРМА СВЯЗИ (отправка на email через mailto) ==========
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('userName').value;
+        const email = document.getElementById('userEmail').value;
+        const message = document.getElementById('userMessage').value;
+        
+        const subject = `Сообщение с сайта Kizomba от ${name}`;
+        const body = `Имя: ${name}%0AEmail: ${email}%0A%0AСообщение:%0A${message}`;
+        
+        window.location.href = `mailto:znak86@list.ru?subject=${encodeURIComponent(subject)}&body=${body}`;
+        
+        document.getElementById('formSuccess').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('formSuccess').style.display = 'none';
+        }, 5000);
+        
+        document.getElementById('feedbackForm').reset();
+    });
+    
+    // ========== НАВИГАЦИЯ ==========
+    function showMainContent() {
+        document.getElementById('mainContent').style.display = 'block';
+        const articles = ['styleTraditional', 'styleUrban', 'styleTarraxinha', 'styleDouceur', 'styleSemba', 'styleFusion', 'criticalArticle1', 'criticalArticle2'];
+        articles.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.style.display = 'none';
+                el.classList.remove('active');
+            }
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function showStyleArticle(style) {
+        document.getElementById('mainContent').style.display = 'none';
+        const map = { traditional:'styleTraditional', urban:'styleUrban', tarraxinha:'styleTarraxinha', douceur:'styleDouceur', semba:'styleSemba', fusion:'styleFusion' };
+        const articleId = map[style];
+        if (articleId) {
+            const article = document.getElementById(articleId);
+            article.style.display = 'block';
+            article.classList.add('active');
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function showCriticalArticle(num) {
+        document.getElementById('mainContent').style.display = 'none';
+        const article = document.getElementById(`criticalArticle${num}`);
+        article.style.display = 'block';
+        article.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function scrollToSection(sectionId) {
+        showMainContent();
+        setTimeout(() => {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const offset = 80;
+                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
+            }
+        }, 100);
+    }
+    
+    showMainContent();
+</script>
+</body>
+</html>
